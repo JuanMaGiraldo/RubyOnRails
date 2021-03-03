@@ -1,0 +1,12 @@
+<%= form_with model: @user do |form| %>
+
+  <%= render "./shared/input", obj: @user, key: :username, form: form %>
+  <%= render "./shared/input", obj: @user, key: :email, form: form %>
+  <%= render "./shared/password_input", obj: @user, key: :password, form: form %>
+  <%= render "./shared/password_input", obj: @user, key: :password_confirmation, form: form %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+
+<% end %>
