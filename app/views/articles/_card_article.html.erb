@@ -2,7 +2,7 @@
   <div class="card-body">
     <h5 class="card-title text-center"><%= article.title %></h5>
     <hr>
-    <p class="card-text"><%= article.body[0..100]+"..." %></p>
+    <p class="card-text"><%= article.body[0..100] + "..." %></p>
 
     <%= link_to(article, class: "btn btn-success btn-sm pull-right") do %>
       Continue reading  <i class="bi bi-eye-fill"></i>

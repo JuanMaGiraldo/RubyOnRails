@@ -1,4 +1,4 @@
-<% if comment.commenter%>
+<% if comment.commenter %>
   <div class="d-flex flex-row comment-row m-t-0">
       <div class="p-2"><img src="https://www.alenpar.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="user" width="50" class="rounded-circle"></div>
       <div class="comment-text w-100">
@@ -7,6 +7,6 @@
   </div>
 
   <p>
-    <%= link_to 'Destroy Comment', [comment.article, comment],  method: :delete, data: {confirm: "Are you sure?"} %>
+    <%= link_to "Destroy Comment", [comment.article, comment], method: :delete, data: { confirm: "Are you sure?" } %>
   </p>
 <% end %>

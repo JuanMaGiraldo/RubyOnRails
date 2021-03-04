@@ -4,9 +4,9 @@
 
   <% if defined?(submit_path) %>
     <%= form_with url: submit_path do |form| %>
-      <% list_inputs.each do |input|%>
-        <%= render input[:type], obj: obj, key: input[:value], form: form, select_list: input[:select_list] if defined?(input[:select_list])%>
-        <%= render input[:type], obj: obj, key: input[:value], form: form unless defined?(input[:select_list])%>
+      <% list_inputs.each do |input| %>
+        <%= render input[:type], obj: obj, key: input[:value], form: form, select_list: input[:select_list] if defined?(input[:select_list]) %>
+        <%= render input[:type], obj: obj, key: input[:value], form: form unless defined?(input[:select_list]) %>
       <% end %>
 
       <div>
@@ -19,9 +19,9 @@
   <% else %>
     <%= form_with model: obj do |form| %>
 
-      <% list_inputs.each do |input|%>
-        <%= render input[:type], obj: obj, key: input[:value], form: form, select_list: input[:select_list] if defined?(input[:select_list])%>
-        <%= render input[:type], obj: obj, key: input[:value], form: form unless defined?(input[:select_list])%>
+      <% list_inputs.each do |input| %>
+        <%= render input[:type], obj: obj, key: input[:value], form: form, select_list: input[:select_list] if defined?(input[:select_list]) %>
+        <%= render input[:type], obj: obj, key: input[:value], form: form unless defined?(input[:select_list]) %>
       <% end %>
 
       <div>
