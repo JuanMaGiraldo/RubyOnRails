@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   post '/login',   to: 'sessions#create'
   get  '/logout',  to: 'sessions#logout'
 
+  get '/users/:id', to: 'users#index'
+  
   resources :users, only: [:new, :create]
 
   resources :articles do

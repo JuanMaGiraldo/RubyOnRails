@@ -13,3 +13,24 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap";
+
+.header {
+  color: #3d73a3;
+  font-size: 27px;
+  padding: 10px;
+}
+
+.error-message{
+  color: red;  
+}
+
+.div_center{
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+
+.div_center > .btn{
+  margin-left: 10px;
+}

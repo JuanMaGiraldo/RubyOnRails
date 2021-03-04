@@ -1,9 +1,4 @@
-<h1>Login user</h1>
-
-<%= render "form_login", user: @user %><br>
-
-<%= link_to 'Create new account', new_user_path %>
-
+<%= render "./shared/form_create", obj: @user, title: "Login", submit_text:"Login",submit_path: login_path, go_to_url:new_user_path, go_to_message:"Create new account." %>
 
 <% flash.each do |type, msg| %>
   <div>

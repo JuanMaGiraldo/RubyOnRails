@@ -1,3 +1,14 @@
 // Place all the styles related to the Articles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+.div_articles{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card_article{
+  margin: 10px;
+}

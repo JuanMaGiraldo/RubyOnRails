@@ -1,9 +1,10 @@
-<div>
-  <%= form.label key %>
-  <%= form.text_field key %>
-  <%
-    obj.errors.full_messages_for(key).each do |message|
-  %>
-  <div><%= message%> </div>
-  <%end%>
+<div class ="form-group row">
+  <%= form.label key, {class:"col-sm-2 col-form-label"} %>
+  <div class="col-sm-10">
+    <%= form.text_field key ,{class:"form-control",placeholder:"Enter #{key.to_s.gsub(/_/, ' ')}"}%>
+  </div>
 </div>
+
+<% obj.errors.full_messages_for(key).each do |message| %>
+  <span class="help-block mt-3"><%= message%> </span>
+<%end%>
