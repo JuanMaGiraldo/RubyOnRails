@@ -2,6 +2,12 @@ class SessionsController < ApplicationController
   skip_before_action :require_login
   helper_method :list_inputs
 
+  def getList
+    [{ value: "email",type: InputsHelper::INPUT_TEXT},{ value: "password",type: InputsHelper::INPUT_PASSWORD}]
+  end
+
+  helper_method :getList
+
   def login
     @user = User.new
     logout
