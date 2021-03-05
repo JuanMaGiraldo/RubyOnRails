@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  before_action :require_permission, only: %i[edit destroy]
 
   def index
     @user = current_user
@@ -26,7 +27,7 @@ class ArticlesController < ApplicationController
   def destroy
     @user = User.find(params[current_user.id])
     @article = @user.articles.find(params[:id])
-    @article.destroy()
+    @article.destroy
     redirect_to articles_path
   end
 
@@ -47,5 +48,16 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :body, :status)
+  end
+
+  def can_manipulate?
+    article = Article.find(params[:id])
+    article.user_id == helpers.current_user.id
+  end
+
+  def require_permission
+    return if can_manipulate?
+
+    redirect_to articles_path, notice: 'You are not allowed to perform this action'
   end
 end

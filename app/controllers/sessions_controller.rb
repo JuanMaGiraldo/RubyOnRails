@@ -2,11 +2,12 @@ class SessionsController < ApplicationController
   include SessionsHelper
   skip_before_action :require_login
 
-  def getList
-    [{ value: "email",type: InputsHelper::INPUT_TEXT},{ value: "password",type: InputsHelper::INPUT_PASSWORD}]
+  def list_inputs
+    [{ value: 'email', type: InputsHelper::INPUT_TEXT },
+     { value: 'password', type: InputsHelper::INPUT_PASSWORD }]
   end
 
-  helper_method :getList
+  helper_method :list_inputs
 
   def login
     @user = User.new
@@ -19,7 +20,7 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(email: params[:email])
-    if !!@user && @user.authenticate(params[:password])
+    if !@user.nil? && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect_to articles_path
     else

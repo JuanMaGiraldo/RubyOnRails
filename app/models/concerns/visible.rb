@@ -1,11 +1,7 @@
 module Visible
-
-  #Validations are methods called at the class level
-  #this extend give us a simpler way to include them.
-
   extend ActiveSupport::Concern
 
-  VALID_STATUSES = ['public','private','archived']
+  VALID_STATUSES = %w[public private archived].freeze
 
   def archived?
     status == 'archived'
@@ -20,5 +16,4 @@ module Visible
       where(status: 'public').count
     end
   end
-
 end

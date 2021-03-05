@@ -16,6 +16,13 @@
     <%= link_to "Logout", logout_path, class:"navbar-brand"%><br>
     <%= link_to "Back", :back, class:"navbar-brand"%><br>
   </nav>
+
   <%= yield %>
+
+  <% flash.each do |type, msg| %>
+    <div>
+      <%= msg %>
+    </div>
+  <% end %>
   </body>
 </html>
