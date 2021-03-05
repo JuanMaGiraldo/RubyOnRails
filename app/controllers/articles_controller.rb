@@ -47,15 +47,23 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:title, :body, :status)
   end
 
+<<<<<<< HEAD
   def owner?
     return false unless logged_in?
 
+=======
+  def can_manipulate?
+>>>>>>> Adding rubocop and fixing warmings
     article = Article.find(params[:id])
     article.user_id == current_user.id
   end
 
   def require_permission
+<<<<<<< HEAD
     return if owner?
+=======
+    return if can_manipulate?
+>>>>>>> Adding rubocop and fixing warmings
 
     redirect_to articles_path, notice: 'You are not allowed to perform this action'
   end
