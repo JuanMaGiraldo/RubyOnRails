@@ -1,14 +1,20 @@
-
 <div class ="div_center">
-  <span class="header"><%=@user.username%></span>
-
-  <%= link_to(new_article_path, class: "btn btn-primary btn-sm") do %>
-    Follow  <i class="bi bi-person-plus-fill"></i>
-  <% end %>
-
-  <%= link_to(new_article_path, class: "btn btn-primary btn-sm") do %>
-    Unfollow  <i class="bi bi-person-dash-fill"></i>
-  <% end %>
+  <span class=" header"><%= @user.username %></span>
+  <% if logged_in? %>
+    <% if user_follows_blogger? %>
+      <%= link_to("/users/unfollow/#{@user.id}", class: "btn btn-primary btn-sm") do %>
+        Unfollow  <i class="bi bi-person-dash-fill"></i>
+      <% end %>
+    <% else %>
+      <%= link_to("/users/follow/#{@user.id}", class: "btn btn-primary btn-sm") do %>
+        Follow  <i class="bi bi-person-plus-fill"></i>
+      <% end %>
+    <% end %>
+  </div>
+<% else %>
 </div>
-
-<%= render "./articles/show_articles", articles: @user.articles%>
+  <div class="div_center alert alert-warning">
+    <span class="text-center">Please log in to your account to follow this blogger!</span>
+  </div>
+<% end %>
+<%= render "./articles/show_articles", articles: @user.articles %>

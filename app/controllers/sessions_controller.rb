@@ -1,17 +1,11 @@
 class SessionsController < ApplicationController
   include SessionsHelper
   skip_before_action :require_login
-
-  def list_inputs
-    [{ value: 'email', type: InputsHelper::INPUT_TEXT },
-     { value: 'password', type: InputsHelper::INPUT_PASSWORD }]
-  end
-
   helper_method :list_inputs
 
   def login
     @user = User.new
-    session[:user_id] = nil
+    logout
   end
 
   def logout
@@ -26,5 +20,12 @@ class SessionsController < ApplicationController
     else
       redirect_to login_path
     end
+  end
+
+  private
+
+  def list_inputs
+    [{ value: 'email', type: InputsHelper::INPUT_TEXT },
+     { value: 'password', type: InputsHelper::INPUT_PASSWORD }]
   end
 end

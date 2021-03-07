@@ -1,15 +1,16 @@
 <div class ="small-middle-container p-5 my-3 border">
 
-  <%= form_with model: [ @article, @article.comments.build ],html: {class: "form-inline"} do |form| %> 
+  <%= form_with model: [@article, @article.comments.build], html: { class: "form-inline" } do |form| %>
 
     <div class="form-group mb-2">
       <div class="col-sm-10">
-        <%= form.text_field :body ,{class:"form-control",placeholder:"Write a comment"}%>
+        <%= form.text_field :body, { class: "form-control", placeholder: "Write a comment" } %>
       </div>
     </div>
     <div class="form-group mx-sm-3 mb-2">
-      <%= form.select :status, ['public', 'private', 'archived'], {}, { class: 'form-control'} %>
+      <%= form.select :status, ["public", "private", "archived"], {}, { class: "form-control" } %>
     </div>
     <%= form.submit "Send", class: "btn btn-md btn-primary" %>
   <% end %>
 
+</div>

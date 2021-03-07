@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  skip_before_action :require_login, only: %i[index show]
   before_action :require_permission, only: %i[edit destroy]
 
   def index
@@ -12,6 +13,7 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
     @user = @article.user
+    @can_manipulate = owner?
   end
 
   def new
@@ -50,14 +52,23 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:title, :body, :status)
   end
 
-  def can_manipulate?
+  def owner?
+    return false unless helpers.logged_in?
+
     article = Article.find(params[:id])
     article.user_id == helpers.current_user.id
   end
 
   def require_permission
-    return if can_manipulate?
+    return if owner?
 
     redirect_to articles_path, notice: 'You are not allowed to perform this action'
+  end
+
+  def list_inputs
+    [{  value: 'title',  type: InputsHelper::INPUT_TEXT },
+     {  value: 'body',   type: InputsHelper::INPUT_TEXT },
+     {  value: 'status', type: InputsHelper::INPUT_SELECT,
+        select_list: %w[public private archived] }]
   end
 end

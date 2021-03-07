@@ -15,8 +15,29 @@
     </div>
   </div>
 </div>
+<br>
+<% unless logged_in? %>
+  <div class="div_center alert alert-warning">
+    <span class="text-center">Please log in to your account to comment this blogger!</span>
+  </div>
+<% end %>
 
-<%= render "comments/form" %>
-  <br>
-  <%= render @article.comments.reverse %>
+
+<% if user_follows_blogger? %>
+  <%= render "comments/form" %>
+<% else %>
+  <div class="div_center alert alert-warning">
+    <span class="text-center">Follow the blogger to comment his articles!</span>
+  </div>
+<% end %>
+
+
+<div class ="small-middle-container p-5 my-3 border">
+  <% if @article.article_has_comments? %>
+    <%= render @article.comments.reverse %>
+  <% else %>
+  <div class="div_center alert alert-warning">
+    <span class="text-center">This article has no comments, be the first to comment!</span>
+  </div>
+  <% end %>
 </div>

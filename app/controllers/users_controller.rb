@@ -19,6 +19,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def follow
+    @user = User.find(params[:id])
+    helpers.current_user.follow(@user)
+    render :view
+  end
+
+  def unfollow
+    @user = User.find(params[:id])
+    helpers.current_user.unfollow(@user)
+    render :view
+  end
+
   private
 
   def user_params
