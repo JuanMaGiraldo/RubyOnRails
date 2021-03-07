@@ -29,11 +29,7 @@ class CommentsController < ApplicationController
   end
 
   def require_permission
-<<<<<<< HEAD
-    return if logged_in? # following
-=======
     return if logged_in?
->>>>>>> Adding rubocop and fixing warmings
 
     redirect_to articles_path, notice: 'You are not allowed to perform this action'
   end

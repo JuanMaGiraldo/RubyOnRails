@@ -1,20 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :require_login
 
-<<<<<<< HEAD
   def view
-=======
-  def list_inputs
-    [{ value: 'username', type: InputsHelper::INPUT_TEXT },
-     { value: 'email', type: InputsHelper::INPUT_TEXT },
-     { value: 'password', type: InputsHelper::INPUT_PASSWORD },
-     { value: 'password_confirmation', type: InputsHelper::INPUT_PASSWORD }]
-  end
-
-  helper_method :list_inputs
-
-  def index
->>>>>>> Adding rubocop and fixing warmings
     @user = User.find(params[:id])
   end
 

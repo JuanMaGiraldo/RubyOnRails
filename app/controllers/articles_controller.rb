@@ -4,8 +4,13 @@ class ArticlesController < ApplicationController
   helper_method %i[user_follows_blogger?]
 
   def index
-    @articles = Article.where.not(user_id: current_user.id)
-    @user_articles = current_user.articles
+    if logged_in?
+      @articles = Article.where.not(user_id: current_user.id)
+      @user_articles = current_user.articles
+    else
+      @articles = Article.all
+      @user_articles
+    end
   end
 
   def show
@@ -43,28 +48,24 @@ class ArticlesController < ApplicationController
 
   private
 
-  def article_params
-    params.require(:article).permit(:title, :body, :status)
-  end
-
-<<<<<<< HEAD
   def owner?
     return false unless logged_in?
 
-=======
-  def can_manipulate?
->>>>>>> Adding rubocop and fixing warmings
     article = Article.find(params[:id])
-    article.user_id == current_user.id
+    current_user.owner?(article)
+  end
+
+  def user_can_comment?
+    user_follows_blogger? || owner?
   end
 
   def require_permission
-<<<<<<< HEAD
     return if owner?
-=======
-    return if can_manipulate?
->>>>>>> Adding rubocop and fixing warmings
 
-    redirect_to articles_path, notice: 'You are not allowed to perform this action'
+    redirect_to articles_path, alert: 'You are not allowed to perform this action'
+  end
+
+  def article_params
+    params.require(:article).permit(:title, :body, :status)
   end
 end
