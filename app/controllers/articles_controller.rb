@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   skip_before_action :require_login, only: %i[index show]
   before_action :require_permission, only: %i[edit destroy]
-  helper_method %i[user_follows_blogger?]
+  helper_method %i[user_follows_blogger? user_can_comment? owner?]
 
   def index
     if logged_in?
@@ -30,7 +30,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article = current_user.articles.find(params[:id])
     @article.destroy
-    redirect_to articles_path
+    redirect_to articles_path, notice: 'Article deleted successfully!'
   end
 
   def edit

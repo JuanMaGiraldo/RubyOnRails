@@ -11,10 +11,6 @@ class CommentsController < ApplicationController
     end
   end
 
-<<<<<<< HEAD
-=======
-  # URL: /articles/:article_id/comments/:id
->>>>>>> Adding rubocop and fixing warmings
   def destroy
     @article = Article.find(params[:article_id])
     @comment = @article.comments.find(params[:id])
@@ -31,6 +27,6 @@ class CommentsController < ApplicationController
   def require_permission
     return if logged_in?
 
-    redirect_to articles_path, notice: 'You are not allowed to perform this action'
+    redirect_to articles_path, alert: 'You are not allowed to perform this action'
   end
 end

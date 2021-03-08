@@ -6,7 +6,7 @@
         <%= render input[:type], obj: obj, key: input[:value], form: form, select_list: input[:select_list] if defined?(input[:select_list]) %>
         <%= render input[:type], obj: obj, key: input[:value], form: form unless defined?(input[:select_list]) %>
       <% end %>
-      <div>
+      <div class="col text-center">
         <%= form.submit submit_text, class: "btn btn-lg btn-primary" %>
       </div>
       <br>
@@ -18,7 +18,7 @@
         <%= render input[:type], obj: obj, key: input[:value], form: form, select_list: input[:select_list] if defined?(input[:select_list]) %>
         <%= render input[:type], obj: obj, key: input[:value], form: form unless defined?(input[:select_list]) %>
       <% end %>
-      <div>
+      <div class="col text-center">
         <%= form.submit submit_text, class: "btn btn-lg btn-primary" %>
       </div>
       <br>
