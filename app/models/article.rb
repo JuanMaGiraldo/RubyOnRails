@@ -1,6 +1,6 @@
 class Article < ApplicationRecord
   include Visible
-  
+
   has_many :comments, dependent: :destroy #delete comments when article is deleted.
 
   belongs_to :user
