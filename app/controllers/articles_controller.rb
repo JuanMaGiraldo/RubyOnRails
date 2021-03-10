@@ -1,6 +1,10 @@
 class ArticlesController < ApplicationController
+
   def index
-    @articles = Article.all
+    @user = current_user
+    @articles = @user.articles
+    @count = @articles.count
+    @user_name = @user.username
   end
 
   def show
@@ -12,13 +16,16 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_params)
+    @user = User.find(current_user.id)
+    @article = @user.articles.create(article_params)
+    redirect_to article_path(@article)
+  end
 
-    if @article.save
-      redirect_to @article
-    else
-      render :new
-    end
+  def destroy
+    @user = User.find(params[current_user.id])
+    @article = @user.articles.find(params[:id])
+    @article.destroy()
+    redirect_to articles_path
   end
 
   def edit
@@ -34,17 +41,9 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def destroy
-    @article = Article.find(params[:id])
-    @article.destroy
-
-    redirect_to root_path
-  end
-  
-
   private
 
   def article_params
-    params.require(:article).permit(:title, :body)
+    params.require(:article).permit(:title, :body, :status)
   end
 end

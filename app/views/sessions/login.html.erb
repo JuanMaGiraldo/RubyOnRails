@@ -1,0 +1,12 @@
+<h1>Login user</h1>
+
+<%= render "form_login", user: @user %><br>
+
+<%= link_to 'Create new account', new_user_path %>
+
+
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>
