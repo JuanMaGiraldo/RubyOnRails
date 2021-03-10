@@ -7,11 +7,11 @@
       <p class="card-text"><%= @article.body %></p>
     </div>
     <div class="card-footer text-muted">
-      <%= "#{@days} days ago" %>
+      <%= "#{@article.created_days_ago} days ago" %>
       <%= link_to "Edit", edit_article_path(@article) %> </li>
       <%= link_to "Destroy", article_path(@article), method: :delete, data: {confirm: "Are you sure?"}%> </li>
       Autor:
-      <%= link_to @user.username, "/users/#{@user.id}" %> </li>
+      <%= link_to @user.username, "/users/view/#{@user.id}" %> </li>
     </div>
   </div>
 </div>

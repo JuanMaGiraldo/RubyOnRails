@@ -1,12 +1,5 @@
 class ArticlesController < ApplicationController
 
-  def getList
-    [{ value: "title",type: InputsHelper::INPUT_TEXT},{ value: "body",type: InputsHelper::INPUT_TEXT},
-      { value: "status",type: InputsHelper::INPUT_SELECT, select_list: ['public','private','archived']}]
-  end
-
-  helper_method :getList
-
   def index
     @user = current_user
     @articles = Article.where.not(user_id: @user.id)
@@ -17,8 +10,7 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
-    @user = User.find(@article.user_id)
-    @days = ((Time.new - @article.created_at) / 86400).to_i
+    @user = @article.user
   end
 
   def new

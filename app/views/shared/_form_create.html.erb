@@ -1,11 +1,10 @@
 <div class ="container p-5 my-3 border">
 
   <legend class="text-center header"><%= title %></legend>
-  
+
   <% if defined?(submit_path) %>
     <%= form_with url: submit_path do |form| %>
-      
-      <% getList.each do |input|%>
+      <% list_inputs.each do |input|%>
         <%= render input[:type], obj: obj, key: input[:value], form: form, select_list: input[:select_list] if defined?(input[:select_list])%>
         <%= render input[:type], obj: obj, key: input[:value], form: form unless defined?(input[:select_list])%>
       <% end %>
@@ -19,8 +18,8 @@
     <% end %>
   <% else %>
     <%= form_with model: obj do |form| %>
-      
-      <% getList.each do |input|%>
+
+      <% list_inputs.each do |input|%>
         <%= render input[:type], obj: obj, key: input[:value], form: form, select_list: input[:select_list] if defined?(input[:select_list])%>
         <%= render input[:type], obj: obj, key: input[:value], form: form unless defined?(input[:select_list])%>
       <% end %>
@@ -29,9 +28,7 @@
         <%= form.submit submit_text, class: "btn btn-lg btn-primary" %>
       </div>
       <br>
-
       <%= link_to go_to_message, go_to_url if defined?(go_to_url) %>
     <% end %>
   <% end %>
-    
 </div>
