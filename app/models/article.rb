@@ -11,4 +11,8 @@ class Article < ApplicationRecord
   def created_days_ago
     ((Time.new - created_at) / 86_400).to_i
   end
+
+  def article_has_comments?
+    !comments.empty? && !comments[0].id.nil?
+  end
 end

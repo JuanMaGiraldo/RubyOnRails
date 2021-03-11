@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
-  root 'sessions#login'
+  root 'articles#index'
 
   get  '/login',   to: 'sessions#login'
   post '/login',   to: 'sessions#create'
   get  '/logout',  to: 'sessions#logout'
 
   get '/users/view/:id', to: 'users#view'
+  get '/users/follow/:id', to: 'users#follow'
+  get '/users/unfollow/:id', to: 'users#unfollow'
 
-  resources :users, only: [:new, :create]
+  resources :users, only: %i[new create]
 
   resources :articles do
     resources :comments

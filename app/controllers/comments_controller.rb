@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :require_permission, only: :create
 
   def create
     @article = Article.find(params[:article_id])
@@ -13,7 +14,7 @@ class CommentsController < ApplicationController
   def destroy
     @article = Article.find(params[:article_id])
     @comment = @article.comments.find(params[:id])
-    @comment.destroy()
+    @comment.destroy
     redirect_to article_path(@article)
   end
 
@@ -21,5 +22,11 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body, :status).merge(commenter: current_user.username)
+  end
+
+  def require_permission
+    return if logged_in? # following
+
+    redirect_to articles_path, notice: 'You are not allowed to perform this action'
   end
 end

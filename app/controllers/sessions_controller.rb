@@ -1,10 +1,10 @@
 class SessionsController < ApplicationController
-  include SessionsHelper
   skip_before_action :require_login
+  helper_method :list_inputs
 
   def login
     @user = User.new
-    session[:user_id] = nil
+    logout
   end
 
   def logout
@@ -13,11 +13,13 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(email: params[:email])
-    if !!@user && @user.authenticate(params[:password])
+    if !@user.nil? && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect_to articles_path
     else
       redirect_to login_path
     end
   end
+
+  private
 end

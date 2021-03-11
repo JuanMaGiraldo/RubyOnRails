@@ -8,6 +8,10 @@ gem 'rails', '~> 6.1.3'
 
 gem 'validates_email_format_of'
 
+gem 'rubocop-performance', require: false
+gem 'rubocop-rails', require: false
+gem 'rubocop-rspec', require: false
+
 gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
