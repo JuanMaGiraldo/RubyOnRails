@@ -11,7 +11,7 @@
       <%= link_to "Edit", edit_article_path(@article) %> </li>
       <%= link_to "Destroy", article_path(@article), method: :delete, data: { confirm: "Are you sure?" } %> </li>
       Autor:
-      <%= link_to @user.username, "/users/view/#{@user.id}" %> </li>
+      <%= link_to @author.username, "/users/view/#{@author.id}" %> </li>
     </div>
   </div>
 </div>
@@ -23,7 +23,7 @@
 <% end %>
 
 
-<% if user_follows_blogger? %>
+<% if user_follows_blogger?(@author) %>
   <%= render "comments/form" %>
 <% else %>
   <div class="div_center alert alert-warning">

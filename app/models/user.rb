@@ -29,8 +29,10 @@ class User < ApplicationRecord
   end
 
   def follows_blogger?(blogger)
-    p '******************************************************'
-    p !(followeds.find { |user| user.id == blogger.id }).nil?
-    !(followeds.find { |user| user.id == blogger.id }).nil?
+    followeds.include?(blogger)
+  end
+
+  def owner?(article)
+    articles.include?(article)
   end
 end

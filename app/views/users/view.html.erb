@@ -1,7 +1,7 @@
 <div class ="div_center">
   <span class=" header"><%= @user.username %></span>
   <% if logged_in? %>
-    <% if user_follows_blogger? %>
+    <% if user_follows_blogger?(@user) %>
       <%= link_to("/users/unfollow/#{@user.id}", class: "btn btn-primary btn-sm") do %>
         Unfollow  <i class="bi bi-person-dash-fill"></i>
       <% end %>
