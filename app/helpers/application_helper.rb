@@ -4,7 +4,7 @@ module ApplicationHelper
   end
 
   def current_user
-    return User.new(name: "Annonymous....") unless logged_in?
+    return User.new(username: "Anonymous") unless logged_in?
 
     @current_user ||= User.find_by_id(session[:user_id])
   end

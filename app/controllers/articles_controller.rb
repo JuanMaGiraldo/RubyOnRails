@@ -56,7 +56,7 @@ class ArticlesController < ApplicationController
   end
 
   def user_can_comment?
-    user_follows_blogger? || owner?
+    user_follows_blogger?(@author) || owner?
   end
 
   def require_permission
