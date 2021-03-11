@@ -79,6 +79,6 @@ class ArticlesController < ApplicationController
   def require_permission
     return if owner?
 
-    redirect_to articles_path, notice: 'You are not allowed to perform this action'
+    redirect_to articles_path, alert: 'You are not allowed to perform this action'
   end
 end

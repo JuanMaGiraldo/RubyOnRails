@@ -8,10 +8,16 @@
     </div>
     <div class="card-footer text-muted">
       <%= "#{@article.created_days_ago} days ago" %>
-      <%= link_to "Edit", edit_article_path(@article) %> </li>
-      <%= link_to "Destroy", article_path(@article), method: :delete, data: { confirm: "Are you sure?" } %> </li>
       Autor:
       <%= link_to @author.username, "/users/view/#{@author.id}" %> </li>
+      <% if owner? %>
+        <%= link_to(article_path(@article), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger float-right") do %>
+          <i class="bi bi-trash-fill"></i>
+        <% end %>
+        <%= link_to(edit_article_path(@article), class: "btn btn-warning float-right") do %>
+          <i class="bi bi-pencil-fill"></i>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </div>
@@ -22,7 +28,7 @@
   </div>
 <% end %>
 
-<% if user_follows_blogger?(@author) %>
+<% if user_can_comment? %>
   <%= render "comments/form" %>
 <% else %>
   <div class="div_center alert alert-warning">
