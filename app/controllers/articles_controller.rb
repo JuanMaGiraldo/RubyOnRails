@@ -68,4 +68,17 @@ class ArticlesController < ApplicationController
   def article_params
     params.require(:article).permit(:title, :body, :status)
   end
+
+  def owner?
+    return false unless logged_in?
+
+    article = Article.find(params[:id])
+    article.user_id == current_user.id
+  end
+
+  def require_permission
+    return if owner?
+
+    redirect_to articles_path, notice: 'You are not allowed to perform this action'
+  end
 end

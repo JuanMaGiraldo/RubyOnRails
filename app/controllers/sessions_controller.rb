@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_action :require_login
+  helper_method :list_inputs
 
   def login
     @user = User.new
@@ -19,5 +20,4 @@ class SessionsController < ApplicationController
       redirect_to login_path, alert: 'Wrong email or password!'
     end
   end
-
 end

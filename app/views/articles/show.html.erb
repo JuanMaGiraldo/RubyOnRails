@@ -22,14 +22,13 @@
   </div>
 <% end %>
 
-<% if user_can_comment? %>
+<% if user_follows_blogger?(@author) %>
   <%= render "comments/form" %>
 <% else %>
   <div class="div_center alert alert-warning">
     <span class="text-center">Follow the blogger to comment his articles!</span>
   </div>
 <% end %>
-
 
 <div class ="small-middle-container p-5 my-3 border">
   <% if @article.article_has_comments? %>
