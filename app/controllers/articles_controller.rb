@@ -1,11 +1,16 @@
 class ArticlesController < ApplicationController
   skip_before_action :require_login, only: %i[index show]
   before_action :require_permission, only: %i[edit destroy]
-  helper_method %i[user_follows_blogger?]
+  helper_method %i[user_follows_blogger? user_can_comment? owner?]
 
   def index
-    @articles = Article.where.not(user_id: current_user.id)
-    @user_articles = current_user.articles
+    if logged_in?
+      @articles = Article.where.not(user_id: current_user.id)
+      @user_articles = current_user.articles
+    else
+      @articles = Article.all
+      @user_articles
+    end
   end
 
   def show
@@ -25,7 +30,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article = current_user.articles.find(params[:id])
     @article.destroy
-    redirect_to articles_path
+    redirect_to articles_path, notice: 'Article deleted successfully!'
   end
 
   def edit
@@ -42,6 +47,23 @@ class ArticlesController < ApplicationController
   end
 
   private
+
+  def owner?
+    return false unless logged_in?
+
+    article = Article.find(params[:id])
+    current_user.owner?(article)
+  end
+
+  def user_can_comment?
+    user_follows_blogger?(@author) || owner?
+  end
+
+  def require_permission
+    return if owner?
+
+    redirect_to articles_path, alert: 'You are not allowed to perform this action'
+  end
 
   def article_params
     params.require(:article).permit(:title, :body, :status)

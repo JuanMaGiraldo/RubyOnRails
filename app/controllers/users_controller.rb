@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :require_login
+  helper_method %i[current_user_profile?]
 
   def view
     @user = User.find(params[:id])
@@ -35,5 +36,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :email, :password)
+  end
+
+  def current_user_profile?
+    helpers.current_user.id == params[:id].to_i
   end
 end

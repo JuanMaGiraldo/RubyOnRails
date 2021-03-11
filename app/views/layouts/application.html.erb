@@ -5,22 +5,16 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "application", media: "all", 'data-turbolinks-track': "reload" %>
+    <%= javascript_pack_tag "application", 'data-turbolinks-track': "reload" %>
   </head>
   <body>
-    <nav class="navbar navbar-dark bg-primary mb-3">
-      <%= link_to "Articles", articles_path, class:"navbar-brand"%><br>
-      <%= link_to "Logout", logout_path, class:"navbar-brand"%><br>
-      <%= link_to "Back", :back, class:"navbar-brand"%><br>
-    </nav>
+    <header>
+      <%= render "layouts/navigation" %>
+    </header>
     <div class="container">
+      <%= render "layouts/messages" %>
       <%= yield %>
     </div>
-    <% flash.each do |type, msg| %>
-      <div>
-        <%= msg %>
-      </div>
-    <% end %>
   </body>
 </html>

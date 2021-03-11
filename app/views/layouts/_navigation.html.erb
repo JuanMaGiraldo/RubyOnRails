@@ -1,0 +1,14 @@
+<nav class="navbar navbar-dark bg-primary mb-3">
+  <%= link_to(articles_path, class: "navbar-brand") do %>
+    Articles  <i class="bi bi-book"></i>
+  <% end %>
+  <% if logged_in? %>
+    <%= link_to(logout_path, class: "navbar-brand") do %>
+      Logout <i class="bi bi-door-open"></i>
+    <% end %>
+  <% else %>
+    <%= link_to(login_path, class: "navbar-brand") do %>
+      Login <i class="bi bi-box-arrow-in-right"></i>
+    <% end %>
+  <% end %>
+</nav>

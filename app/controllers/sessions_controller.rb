@@ -17,9 +17,7 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to articles_path
     else
-      redirect_to login_path
+      redirect_to login_path, alert: 'Wrong email or password!'
     end
   end
-
-  private
 end
