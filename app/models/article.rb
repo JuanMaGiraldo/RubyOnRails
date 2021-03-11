@@ -7,4 +7,8 @@ class Article < ApplicationRecord
 
   validates :title, presence: true
   validates :body, presence: true, length: { minimum: 10 }
+
+  def created_days_ago
+    ((Time.new - created_at) / 86_400).to_i
+  end
 end

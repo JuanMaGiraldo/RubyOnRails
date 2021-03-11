@@ -1,15 +1,22 @@
-<h1> <%= @article.title %> </h1>
+<div class ="container">
+  <div class="card">
+    <div class="card-header">
+      <legend class="text-center header"><%= @article.title %></legend>
+    </div>
+    <div class="card-body">
+      <p class="card-text"><%= @article.body %></p>
+    </div>
+    <div class="card-footer text-muted">
+      <%= "#{@article.created_days_ago} days ago" %>
+      <%= link_to "Edit", edit_article_path(@article) %> </li>
+      <%= link_to "Destroy", article_path(@article), method: :delete, data: {confirm: "Are you sure?"}%> </li>
+      Autor:
+      <%= link_to @user.username, "/users/view/#{@user.id}" %> </li>
+    </div>
+  </div>
+</div>
 
-<p><%= @article.body %></p>
-
-<ul>
-  <li> <%= link_to "Edit", edit_article_path(@article) %> </li>
-  <li> <%= link_to "Destroy", article_path(@article), method: :delete, data: {confirm: "Are you sure?"}%> </li>
-</ul>
-
-<h2>Comments</h2>
-<%= render @article.comments%>
-
-
-<h2>Add a comment:</h2>
 <%= render 'comments/form'%>
+  <br>
+  <%= render @article.comments.reverse%>
+</div>

@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  include SessionsHelper
   skip_before_action :require_login
 
   def login
@@ -19,5 +20,4 @@ class SessionsController < ApplicationController
       redirect_to login_path
     end
   end
-
 end

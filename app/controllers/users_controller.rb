@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   skip_before_action :require_login
 
+  def view
+    @user = User.find(params[:id])
+  end
+
   def new
     @user = User.new
   end

@@ -2,13 +2,15 @@ class ArticlesController < ApplicationController
 
   def index
     @user = current_user
-    @articles = @user.articles
-    @count = @articles.count
+    @articles = Article.where.not(user_id: @user.id)
+    @user_articles = @user.articles
+    @count = @user_articles.count
     @user_name = @user.username
   end
 
   def show
     @article = Article.find(params[:id])
+    @user = @article.user
   end
 
   def new

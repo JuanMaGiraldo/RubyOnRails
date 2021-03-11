@@ -1,13 +1,12 @@
-<p>
-  <strong>Commenter:</strong>
-  <%= comment.commenter %>
-</p>
+<% if comment.commenter%>
+  <div class="d-flex flex-row comment-row m-t-0">
+      <div class="p-2"><img src="https://www.alenpar.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="user" width="50" class="rounded-circle"></div>
+      <div class="comment-text w-100">
+          <h6 class="font-medium"><%= comment.commenter %></h6> <span class="m-b-15 d-block"><%= comment.body %></span>
+      </div>
+  </div>
 
-<p>
-  <strong>Comment:</strong>
-  <%= comment.body %>
-</p>
-
-<p>
-  <%= link_to 'Destroy Comment', [comment.article, comment],  method: :delete, data: {confirm: "Are you sure?"} %>
-</p>
+  <p>
+    <%= link_to 'Destroy Comment', [comment.article, comment],  method: :delete, data: {confirm: "Are you sure?"} %>
+  </p>
+<% end %>

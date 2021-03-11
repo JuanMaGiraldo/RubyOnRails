@@ -1,0 +1,7 @@
+<div class="div_articles container">
+  <% articles.each do |article| %>
+    <% unless article.archived? %>
+      <%= render "./articles/card_article", article: article%>
+    <% end %>
+  <% end %>
+</div>

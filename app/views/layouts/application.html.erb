@@ -11,11 +11,11 @@
   </head>
 
   <body>
-  <br>
-  <div>
-  <%= link_to "Logout", logout_path%><br>
-  <%= link_to 'Back', :back %>
-  </div>
-    <%= yield %>
+  <nav class="navbar navbar-dark bg-primary mb-3">
+    <%= link_to "Articles", articles_path, class:"navbar-brand"%><br>
+    <%= link_to "Logout", logout_path, class:"navbar-brand"%><br>
+    <%= link_to "Back", :back, class:"navbar-brand"%><br>
+  </nav>
+  <%= yield %>
   </body>
 </html>
